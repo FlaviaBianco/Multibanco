@@ -1,23 +1,54 @@
 from Functions import autenticar_cliente
 from Menu import MenuCliente
+from MenuAdmin import MenuAdmin
 from Clientes import cliente
 
 while True:
 
-    numero_conta = input("Digite o número da conta: ")
-    pin = input("Digite o PIN: ")
+    print("1. Acesso Cliente")
+    print("2. Acesso Administrador")
+    print("0. Sair")    
+    print()
+    
+    opcao = input("Escolha uma opção: ")
 
-    conta = autenticar_cliente(cliente,numero_conta, pin)
+    if opcao == "1":
 
-    if conta:
+        print ()
 
-        print("\nAutenticação bem-sucedida!")
-        print(f"\nBem-vindo, {conta['titular']}!\n")
+        numero_conta = input("Digite o número da conta: ")
+        pin = input("Digite o PIN: ")
 
-        print(f"Numero da conta: {numero_conta}\n")
+        conta = autenticar_cliente(cliente,numero_conta, pin)
 
-        MenuCliente(conta)
+        if conta == False:
+            continue
+
+        if conta:
+
+            print("\nAutenticação bem-sucedida!")
+            print(f"\nBem-vindo, {conta['titular']}!\n")
+
+            print(f"Numero da conta: {numero_conta}\n")
+
+            MenuCliente(conta, numero_conta)
+
+        else:
+
+            print("Número de conta ou PIN incorretos.")
+
+    elif opcao == "2":
+        MenuAdmin()
+
+    elif opcao == "0":
+        
+        print ("Encerrando, obrigada!")
+        break
 
     else:
 
-        print("Número de conta ou PIN incorretos.")
+        print("Opção inválida.")
+
+        print ("-"*30)
+
+
